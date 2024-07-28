@@ -1,19 +1,33 @@
-// language
+
 const translations = {
     ka: {
         product: "პროდუქტები",
         logo: "../svgs/tbc.svg",
         selectedLanguage: "ქარ",
+        offers:"შეთავაზებები",
+        conceptSpace:"კონცეპტის სივრცე",
+        subscribe:"გამოიწერეთ ნაკრები"
     },
     en: {
-        product: "products",
+        product: "Products",
         logo: "../svgs/tbc-en.svg",
         selectedLanguage: "Eng",
+        offers:"Offers",
+        conceptSpace:"Concept Space",
+        subscribe:"SUBSCRIBE TO A PACKAGE",
     },
 };
 
 function switchLanguage(language) {
     document.getElementById('product').textContent = translations[language].product;
+
+    document.getElementById('offers').textContent = translations[language].offers;
+    document.getElementById('conceptSpace').textContent = translations[language].conceptSpace;
+    document.getElementById('subscribe').textContent = translations[language].subscribe;
+
+
+
+
     document.getElementById('tbcLogo').setAttribute("src", translations[language].logo);
     localStorage.setItem('Language', language);
     updateLanguageButtons(language);
@@ -73,14 +87,40 @@ document.querySelectorAll('ul li button').forEach(button => {
     });
 });
 
+
 //SmMenu Toggle
 const MenuToggle = document.querySelector('.menu_toggle_sm')
 const MenuContainer = document.querySelector('.menu_container_sm')
+const headerBackground = document.querySelector('header');
+
+const dynamicFooter = document.querySelector('.footer_main');
+
 
 MenuToggle.onclick = function () {
     MenuToggle.classList.toggle('active');
     MenuContainer.classList.toggle('active');
+    if(MenuToggle.classList.contains('active')){
+        headerBackground.classList.add('header_bg')
+    }else {
+        headerBackground.classList.remove('header_bg')
+    }
 }
+
+
+
+
+
+
+function handleScreenResize() {
+    if (window.innerWidth > 1024) {
+        MenuToggle.classList.remove('active');
+        MenuContainer.classList.remove('active');
+        headerBackground.classList.remove('header_bg')
+    }
+}
+
+window.addEventListener('resize', handleScreenResize);
+handleScreenResize();
 
 //collapse
 document.addEventListener('DOMContentLoaded', () => {
@@ -127,5 +167,88 @@ document.addEventListener('DOMContentLoaded', () => {
             isAnimating = false;
         }, 500);
     });
+});
+
+
+
+
+
+let swiperOffers = new Swiper(".swiper_offers", {
+    slidesPerView: 1,
+    spaceBetween: 15,
+    grabCursor: true,
+    breakpoints: {
+        1024: {
+            slidesPerView: 3,
+            spaceBetween: 30,
+        },
+        620: {
+            slidesPerView: 2,
+        },
+        500: {
+            slidesPerView: 1,
+        },
+    },
+    scrollbar: {
+        el: ".swiper_offers .swiper-scrollbar",
+    },
+    navigation: {
+        nextEl: ".swiper_offers .swiper-button-next",
+        prevEl: ".swiper_offers .swiper-button-prev",
+    },
+});
+
+
+
+
+let swiperProducts = new Swiper(".swiper_products", {
+    slidesPerView: 1,
+    spaceBetween: 15,
+    grabCursor: true,
+    breakpoints: {
+        1024: {
+            slidesPerView: 3,
+            spaceBetween: 30,
+        },
+        620: {
+            slidesPerView: 2,
+        },
+        500: {
+            slidesPerView: 1,
+        },
+    },
+    scrollbar: {
+        el: ".swiper_products .swiper-scrollbar",
+    },
+    navigation: {
+        nextEl: ".swiper_products .swiper-button-next",
+        prevEl: ".swiper_products .swiper-button-prev",
+    },
+});
+
+
+let swiperAwards = new Swiper(".swiper_awards", {
+    slidesPerView: 1,
+    spaceBetween: 15,
+    grabCursor: true,
+    breakpoints: {
+        1024: {
+            slidesPerView: 3,
+            spaceBetween: 30,
+        },
+        620: {
+            slidesPerView: 2,
+        },
+        500: {
+            slidesPerView: 1,
+        },
+    },
+    scrollbar: {
+        el: ".swiper_awards .swiper-scrollbar",
+    },
+    navigation: {
+        nextEl: ".swiper_awards .swiper-button-next",
+        prevEl: ".swiper_awards .swiper-button-prev",
+    },
 });
 
